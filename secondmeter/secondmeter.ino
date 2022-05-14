@@ -1,3 +1,9 @@
+//Libs
+#include "Wire.h"
+#include "Adafruit_GFX.h"
+#include "Adafruit_SSD1306.h"
+
+//Notes list
 #define NOTE_B0  31
 #define NOTE_C1  33
 #define NOTE_CS1 35
@@ -89,43 +95,36 @@
 #define NOTE_DS8 4978
 #define DELAYER 200
 
-// библиотеки для работы с OLED экраном Arduino IDE
-#include "Wire.h"
-#include "Adafruit_GFX.h"
-#include "Adafruit_SSD1306.h"
-
-const char now[] = __TIME__;
-//int hour =  atoi(&now[0]);
-//int minute = atoi(&now[3]);
+//Global vars
 int hour = 0;
 int minute = 0;
 int seconds = 0;
-//int seconds = atoi(&now[6]);
 
-
-Adafruit_SSD1306 display(128, 64, &Wire, 4); // указываем размер экрана в пикселях
+Adafruit_SSD1306 display(128, 64, &Wire, 4);
 
 void setup() {
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // указываем адрес устройства на шине
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
-  display.setTextSize(3, 6); // указываем размер шрифта
-  display.setTextColor(SSD1306_WHITE); // указываем цвет надписи
+  display.setTextSize(3, 6);
+  display.setTextColor(SSD1306_WHITE); 
+
+  //Simple melodic
   pinMode(8, OUTPUT);
-      delay(DELAYER);
-    tone(8, NOTE_C5, 200);
-    delay(DELAYER);
-    tone(8, NOTE_C5, 200);
-      delay(DELAYER);
-    tone(8, NOTE_E5, 400);
-      delay(DELAYER);
-    tone(8, NOTE_A4, 200);
-      delay(DELAYER);
+  delay(DELAYER);
+  tone(8, NOTE_C5, 200);
+  delay(DELAYER);
+  tone(8, NOTE_C5, 200);
+  delay(DELAYER);
+  tone(8, NOTE_E5, 400);
+  delay(DELAYER);
+  tone(8, NOTE_A4, 200);
+  delay(DELAYER);
 }
 
 void loop() {
-  display.setTextSize(2, 4); // указываем размер шрифта
-  display.setTextColor(SSD1306_WHITE); // указываем цвет надписи
-  
+  display.setTextSize(2, 4); 
+  display.setTextColor(SSD1306_WHITE); 
+
   display.setCursor(20, 10);
   display.println(hour);
   
@@ -147,39 +146,47 @@ void loop() {
   
   display.display();
   delay(1000);
-  display.clearDisplay(); // очищаем экран
 
+  display.clearDisplay();
 
-    seconds++;
+  seconds++;
   if(seconds == 60) {
     seconds = 0;
     minute++;
   } else if (minute == 30) {
     delay(DELAYER);
     tone(8, NOTE_C5, 200);
+
     delay(DELAYER);
     tone(8, NOTE_C5, 200);
-      delay(DELAYER);
+
+    delay(DELAYER);
     tone(8, NOTE_E5, 400);
-      delay(DELAYER);
+
+    delay(DELAYER);
     tone(8, NOTE_A4, 200);
-      delay(DELAYER);
+
+    delay(DELAYER);
   } else if (minute >= 60) {
-    minute = 0;
     hour++;
+    minute = 0;
+
     delay(DELAYER);
     tone(8, NOTE_C5, 200);
-      delay(DELAYER);
+
+    delay(DELAYER);
     tone(8, NOTE_C5, 200);
-      delay(DELAYER);
+
+    delay(DELAYER);
     tone(8, NOTE_E5, 400);
-      delay(DELAYER);
+
+    delay(DELAYER);
     tone(8, NOTE_A4, 200);
-      delay(DELAYER);
+
+    delay(DELAYER);
   } else if(hour >= 24) {
     hour = 0;
     minute = 0;
     seconds = 0;
   }
-  
 }
