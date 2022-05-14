@@ -1,4 +1,5 @@
-This arduino script has create simple secondmeter
-require: Adafruit_GFX.h, Adafruit_SSD1306.h
-
-PINS: Sounds: 8
+- This arduino script has create simple secondmeter
+- Used libraries: Adafruit_GFX.h, Adafruit_SSD1306.h
+- Download them: https://github.com/adafruit/Adafruit-GFX-Library, https://github.com/adafruit/Adafruit_SSD1306
+- In order to find out your port for i2c you can use the script from the link: https://gist.github.com/M8eight/ea4c8f8935ca6a81e479c9a1955a7ded
+- Sound is on pin 8
