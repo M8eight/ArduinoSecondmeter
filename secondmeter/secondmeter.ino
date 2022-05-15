@@ -113,12 +113,13 @@ void setup() {
   delay(DELAYER);
   tone(8, NOTE_C5, 200);
   delay(DELAYER);
-  tone(8, NOTE_C5, 200);
+  tone(8, NOTE_G5, 200);
   delay(DELAYER);
   tone(8, NOTE_E5, 400);
   delay(DELAYER);
   tone(8, NOTE_A4, 200);
   delay(DELAYER);
+  seconds += 1;
 }
 
 void loop() {
@@ -150,27 +151,32 @@ void loop() {
   display.clearDisplay();
 
   seconds++;
-  if(seconds == 60) {
+  if(seconds >= 60) {
     seconds = 0;
     minute++;
-  } else if (minute == 30) {
-    delay(DELAYER);
-    tone(8, NOTE_C5, 200);
-
-    delay(DELAYER);
-    tone(8, NOTE_C5, 200);
-
-    delay(DELAYER);
-    tone(8, NOTE_E5, 400);
-
-    delay(DELAYER);
-    tone(8, NOTE_A4, 200);
-
-    delay(DELAYER);
   } else if (minute >= 60) {
     hour++;
     minute = 0;
+  } else if(hour >= 24) {
 
+    delay(DELAYER);
+    tone(8, NOTE_C5, 200);
+
+    delay(DELAYER);
+    tone(8, NOTE_C5, 400);
+
+    delay(DELAYER);
+    tone(8, NOTE_A4, 200);
+
+    delay(DELAYER);
+    tone(8, NOTE_E5, 400);
+    
+    hour = 0;
+    minute = 0;
+    seconds = 1;
+  }
+  
+  if (hour == 3 || seconds == 1) {
     delay(DELAYER);
     tone(8, NOTE_C5, 200);
 
@@ -184,9 +190,6 @@ void loop() {
     tone(8, NOTE_A4, 200);
 
     delay(DELAYER);
-  } else if(hour >= 24) {
-    hour = 0;
-    minute = 0;
-    seconds = 0;
+    seconds += 1;
   }
 }
